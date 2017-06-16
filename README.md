@@ -4,7 +4,7 @@
 
 1. bildergalerie Ordner in htdocs verschieben
 
-2. bei wechselnder Ordnerstruktur muss die config.php Datei so angepasst werden, dass sie wieder den Pfad zum Root-Verzeichnis abbildet
+2. bei wechselnder Ordnerstruktur (Standard in XAMPP: htdocs/bildergalerie/index.php muss die config.php Datei so angepasst werden, dass sie wieder den Pfad zum Root-Verzeichnis abbildet
 - $urlpartnumber: wieviele Ordner bis zum root übersprungen werden müssen
 - $pathtoroot: wie diese Ordner heissen (Ordnerstruktur)
 
