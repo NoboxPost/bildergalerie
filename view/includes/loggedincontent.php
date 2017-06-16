@@ -22,7 +22,7 @@ if (isset($_SESSION["actualboxid"])) {
                 <a class='button' href=javascript:void(0);' onclick='openpopup(\"deletecollection\")'>Löschen</a> ";
         if(isset($dbresult["imageuploadfailed"])){
             if($dbresult["imageuploadfailed"]){
-                echo "<p>Upload fehlgeschlagen. Bitte stellen Sie sicher, dass Sie ein Bild ausgewählt haben.</p>";
+                echo "<p>Upload fehlgeschlagen. Bitte stellen Sie sicher, dass Sie ein Bild ausgewählt haben und dass die Grösse nicht mehr als 4MB beträgt.</p>";
             }
         }
         echo "</div>";

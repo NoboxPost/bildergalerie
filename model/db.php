@@ -134,9 +134,8 @@ class db
         $imageFileType = pathinfo($imagePath, PATHINFO_EXTENSION);
 
 
-
         // VALIDATION: Ist dies ein Bild?
-        if (isset($_POST["submit"])) {
+        if (isset($_POST["submit"]) && isset($files['filepath']['tmp_name'])) {
             $check = getimagesize($files["filepath"]["tmp_name"]);
             if ($check !== false) {
                 $returnarray["dbmessage"] .= "Dies ist eine Bildatei.";
@@ -146,10 +145,22 @@ class db
                 $uploadWorked = 0;
             }
         }
-        $returnarray["debug"] = $files["file"]["size"];
 
+        $returnarray["debug"] = "Test";
 
         // VALIDATION: Ist das Bild zu gross?
+        if(isset($files['filepath'])) {
+            $returnarray["debug"] .= "grösse: ".$files['filepath']['size']." ";
+            if($files['filepath']['size'] > 4194304) { //4 MB (size is also in bytes)
+                // File too big
+                $uploadWorked = 0;
+                $returnarray["debug"] .= "Dieses File ist ZU gross";
+            } else {
+                // File within size restrictions
+                $uploadWorked = 1;
+                $returnarray["debug"] .= "Dieses File ist NICHT zu gross";
+            }
+        }
 
 
 

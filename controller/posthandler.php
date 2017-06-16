@@ -71,8 +71,6 @@ if (isset($_POST["form"]))
             $dbresult = db::createimage($_POST,$_FILES);
             $dbresult["test"]="test";
 
-            var_dump($dbresult["debug"]);
-
             break;
         }
 
