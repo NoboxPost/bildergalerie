@@ -1,0 +1,85 @@
+#login.notclicked {
+    display: none;
+}
+
+#login.clicked {
+    display: block;
+}
+
+#register.notclicked {
+    display: none;
+}
+
+#register.clicked {
+    display: block;
+}
+
+#createimage.notclicked {
+    display: none;
+}
+
+#createimage.clicked {
+    display: block;
+}
+
+#createnote.notclicked {
+    display: none;
+}
+
+#createnote.clicked {
+    display: block;
+}
+
+#updatecollection.notclicked {
+    display: none;
+}
+
+#updatecollection.clicked {
+    display: block;
+}
+
+#deletecollection.notclicked {
+    display: none;
+}
+
+#deletecollection.clicked {
+    display: block;
+}
+
+.clicked {
+    text-align: left;
+    box-sizing: border-box;
+    top: 25%;
+    left: 0;
+    right: 0;
+    padding: 2%;
+    background-color: #ffffff;
+    width: 60vw;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 10;
+    border: 0.1em solid #000000;
+    position: fixed;
+}
+
+a.exitbutton {
+    float: right;
+
+    display: inline-block;
+
+}
+
+#noteText {
+    height: 30vh;
+}
+
+.clicked h3{
+    display: block;
+}
+.false{
+    box-shadow: 0 0 10px #FF0000 inset;
+}
+.true{
+    box-shadow: 0 0 10px #70CC66 inset;
+}

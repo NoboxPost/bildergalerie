@@ -1,0 +1,78 @@
+/* SIDENAVIGATION
+
+#sidenav defines layout
+.sidenav changes to .sidenav sidenav clicked (click-event-change)
+*/
+
+
+/* sidenavdisplaybutton NOT CLICKED */
+
+
+
+aside{
+
+}
+
+.sidenavdisplaybutton{
+    font-size: 3em;
+}
+
+.sidenavdisplaybutton a{
+    text-decoration: none;
+}
+
+
+#sidenav.snbnotclicked {
+    display: none;
+}
+
+#sidenavclose.snbnotclicked {
+    display: none;
+}
+
+
+/* sidenavdisplaybutton CLICKED */
+
+#sidenav.snbclicked {
+    height: 100%;
+    width: 300px;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F0F0F0;
+    overflow-x: hidden;
+    padding: 2em;
+    margin-right: 3%;
+    display: block;
+}
+
+#sidenav.snbclicked li {
+    font-size: 1.2em;
+    list-style-type: none;
+    padding-left: 5%;
+}
+
+#sidenav.snbclicked li a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+#sidenavclose.snbclicked {
+    display: block;
+}
+
+#sidenavburger.snbclicked {
+    display: none;
+}
+
+.contentcontainer {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.contentitem{
+    height: 100%;
+
+}

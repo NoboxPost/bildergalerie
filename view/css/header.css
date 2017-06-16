@@ -1,0 +1,60 @@
+html, body{
+    height: 100%;
+}
+
+
+header{
+    padding-top: 1%;
+    height: 100px;
+    min-height: 100px;
+    border-bottom: 1px solid #bbb;
+}
+
+header h1{
+    width: 40%;
+    display: inline-block;
+    vertical-align: sub;
+    margin: 0;
+}
+
+header div.sidenavdisplaybutton{
+    padding-left: 5%;
+    width: 10%;
+    box-sizing: border-box;
+    display: inline-block;
+    line-height: 1.4;
+}
+header div.sidenavbuttonplaceholder{
+
+    width: 10%;
+    box-sizing: border-box;
+    display: inline-block;
+
+}
+
+header form{
+    width: 40%;
+    margin: 0;
+    display: inline-block;
+    text-align: right;
+}
+
+header a.button{
+    margin: 0;
+    margin-left: 1%;
+}
+
+header hr{
+    margin: 0;
+    line-height: 0;
+}
+header #error {
+    margin:0 0 0 72%;
+
+    color: #70CC66;
+}
+header #welcome{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
