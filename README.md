@@ -8,7 +8,7 @@
 - $urlpartnumber: wieviele Ordner bis zum root übersprungen werden müssen
 - $pathtoroot: wie diese Ordner heissen (Ordnerstruktur)
 
-3. im model-Ordner die Datei db.config anpassen
+3. im model-Ordner die Datei dbconfig.php anpassen
 - nach Projektvorgabe stehen die Werte auskommentiert unter den aktuellen
 
 4. in der Datei php.ini müssen eventuell Anpassungen vorgenommen werden:
