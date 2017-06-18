@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 /config.php
 /.idea
-/model
+/model/dbconfig.php
 /images
