@@ -1,8 +1,8 @@
 
-DROP DATABASE IF EXISTS bilderdb_wa_gallati;
+DROP DATABASE IF EXISTS bilderdb_2a_vanoni;
 
-CREATE DATABASE IF NOT EXISTS bilderdb_wa_gallati;
-USE bilderdb_wa_gallati;
+CREATE DATABASE IF NOT EXISTS bilderdb_2a_vanoni;
+USE bilderdb_2a_vanoni;
 
 CREATE TABLE IF NOT EXISTS Users (
   ID_User      INT           NOT NULL AUTO_INCREMENT,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS Image (
   ImageLink VARCHAR(255) NOT NULL,
   User_ID   INT          NOT NULL,
   CONSTRAINT pk_image PRIMARY KEY (ID_Image),
-  CONSTRAINT fk_image_user FOREIGN KEY (User_ID) REFERENCES Users (ID_User),
+  CONSTRAINT fk_image_user FOREIGN KEY (User_ID) REFERENCES Users (ID_User) ON DELETE CASCADE,
   CONSTRAINT uk_image_imagelink UNIQUE KEY (ImageLink)
 );
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Note (
   Notetext TEXT,
   User_ID  INT NOT NULL,
   CONSTRAINT pk_note PRIMARY KEY (ID_Note),
-  CONSTRAINT fk_note_users FOREIGN KEY (User_ID) REFERENCES Users (ID_User)
+  CONSTRAINT fk_note_users FOREIGN KEY (User_ID) REFERENCES Users (ID_User) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Collection (
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Collection (
   Collectiontitle VARCHAR(255) NOT NULL,
   User_ID       INT NOT NULL,
   CONSTRAINT pk_collection PRIMARY KEY (ID_Collection),
-  CONSTRAINT fk_collection_users FOREIGN KEY (User_ID) REFERENCES Users (ID_User)
+  CONSTRAINT fk_collection_users FOREIGN KEY (User_ID) REFERENCES Users (ID_User) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Box (
@@ -82,11 +82,11 @@ CREATE TABLE IF NOT EXISTS Box (
   CONSTRAINT pk_box PRIMARY KEY (ID_Box),
   CONSTRAINT uk_box UNIQUE KEY (Note_ID, Image_ID, Collection_ID),
 #   CONSTRAINT uk_box UNIQUE KEY (Note_ID, Gallery_ID, Collection_ID),
-  CONSTRAINT fk_box_note FOREIGN KEY (Note_ID) REFERENCES Note (ID_Note),
-  CONSTRAINT fk_box_image FOREIGN KEY (Image_ID) REFERENCES Image (ID_Image),
+  CONSTRAINT fk_box_note FOREIGN KEY (Note_ID) REFERENCES Note (ID_Note) ON DELETE CASCADE ,
+  CONSTRAINT fk_box_image FOREIGN KEY (Image_ID) REFERENCES Image (ID_Image) ON DELETE CASCADE ,
 #   CONSTRAINT fk_box_gallery FOREIGN KEY (Gallery_ID) REFERENCES Gallery (ID_Gallery),
 
-  CONSTRAINT fk_box_collection FOREIGN KEY (Collection_Id) REFERENCES Collection (ID_Collection)
+  CONSTRAINT fk_box_collection FOREIGN KEY (Collection_Id) REFERENCES Collection (ID_Collection) on DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS User_Box (
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS User_Box (
   User_ID     INT NOT NULL,
   Box_ID      INT NOT NULL,
   CONSTRAINT pk_users_box PRIMARY KEY (ID_User_Box),
-  CONSTRAINT fk_users_box_users FOREIGN KEY (User_ID) REFERENCES Users (ID_User),
-  CONSTRAINT fk_user_box_box FOREIGN KEY (Box_ID) REFERENCES Box (ID_Box)
+  CONSTRAINT fk_users_box_users FOREIGN KEY (User_ID) REFERENCES Users (ID_User) ON DELETE CASCADE ,
+  CONSTRAINT fk_user_box_box FOREIGN KEY (Box_ID) REFERENCES Box (ID_Box) ON DELETE CASCADE
 );
 

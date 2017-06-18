@@ -35,12 +35,12 @@ if ($url[$urlpartnumber] != "")
     {
         case "index":
         {
-            header("Location: ./view/home.php");
+            header("Location: " . $pathToRoot.  "/view/home.php");
             break;
         }
         case "home":
         {
-            header("Location: ./view/home.php");
+            header("Location: " . $pathToRoot.  "/view/home.php");
             break;
         }
         case "collection": {
@@ -50,12 +50,12 @@ if ($url[$urlpartnumber] != "")
             break;
         }
         case "impressum":{
-            header("Location: ./view/impressum.php");
+            header("Location: " . $pathToRoot.  "/view/impressum.php");
             break;
         }
         default:
         {
-            header("Location: ./view/home.php");
+            header("Location: " . $pathToRoot.  "/view/home.php");
             break;
         }
     }

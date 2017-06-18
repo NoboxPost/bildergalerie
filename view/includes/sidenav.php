@@ -33,6 +33,7 @@
             }else{
                 echo"Bitte erstellen Sie eine neue Collection";
             }
+            echo "<form></form>";
 
             ?>
         </ul>
