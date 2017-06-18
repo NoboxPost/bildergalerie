@@ -6,7 +6,8 @@
 
 2. bei wechselnder Ordnerstruktur (Standard in XAMPP: htdocs/bildergalerie/index.php muss die config.php Datei so angepasst werden, dass sie wieder den Pfad zum Root-Verzeichnis abbildet
 - $urlpartnumber: wieviele Ordner bis zum root übersprungen werden müssen
-- $pathtoroot: wie diese Ordner heissen (Ordnerstruktur)
+- $pathtoroot: wie diese Ordner heissen (Ordnerstruktur).
+    Pfad muss zwingend mit "/" beginnen. Z. B.: c:/xampp/htdocs/bildergalerie/index.php setzt man $pathtoroot = "/bildergalerie". 
 
 3. im model-Ordner die Datei dbconfig.php anpassen
 - nach Projektvorgabe stehen die Werte auskommentiert unter den aktuellen
