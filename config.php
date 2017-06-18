@@ -7,4 +7,4 @@
 //pathToRoot should compensate the skipped path
 
 $urlpartnumber = 0;
-$pathToRoot = "bildergalerie";
+$pathToRoot = "/bildergalerie";
