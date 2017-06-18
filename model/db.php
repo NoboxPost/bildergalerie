@@ -127,11 +127,22 @@ class db
     {
         //benötigt images Ordner
         $returnarray["dbmessage"] = "";
-        $imageFolder = "../images/";
-        $imageName = date("YmdGis") . "_" . $files["filepath"]["name"];
-        $imagePath = $imageFolder . $imageName;
+
+        //FULLSIZE
+        $imageFolderFullsize = "../images/fullsize/";
+        $imageNameFullsize = date("YmdGis") . "_" . $files["filepath"]["name"];
+        $imagePathFullsize = $imageFolderFullsize . $imageNameFullsize;
+
+        //THUMBNAILS
+        $imageFolderThumbnails = "../images/thumbnails/";
+        $imageNameThumbnails = date("YmdGis") . "_" . $files["filepath"]["name"];
+        $imagePathThumbnails = $imageFolderThumbnails . $imageNameThumbnails;
+
+
+
+
         $uploadWorked = 1;
-        $imageFileType = pathinfo($imagePath, PATHINFO_EXTENSION);
+        $imageFileType = pathinfo($imagePathFullsize, PATHINFO_EXTENSION);
 
 
         // VALIDATION: Ist dies ein Bild?
@@ -146,46 +157,46 @@ class db
             }
         }
 
-        $returnarray["debug"] = "Test";
 
         // VALIDATION: Ist das Bild zu gross?
         if(isset($files['filepath'])) {
-            $returnarray["debug"] .= "grösse: ".$files['filepath']['size']." ";
             if($files['filepath']['size'] > 4194304) { //4 MB (size is also in bytes)
                 // File too big
                 $uploadWorked = 0;
-                $returnarray["debug"] .= "Dieses File ist ZU gross";
             } else {
                 // File within size restrictions
                 $uploadWorked = 1;
-                $returnarray["debug"] .= "Dieses File ist NICHT zu gross";
             }
         }
 
 
-
         // VALIDATION: War der Upload erfolgreich?
         if ($uploadWorked == 0) {
-            echo"uploadnotworked";
             $returnarray["dbmessage"] .= " Der Upload hat nicht funktioniert.";
             $returnarray["imageuploadfailed"] =true;
         } else {
-            echo"uploadworked";
-            if (move_uploaded_file($files["filepath"]["tmp_name"], $imagePath)) {
-                echo"movefileworked";
+
+            if (move_uploaded_file($files["filepath"]["tmp_name"], $imagePathFullsize)) {
+
+                self::createThumbnail($imagePathFullsize, $imagePathThumbnails);
+
+
+
                 $returnarray["dbmessage"] .= " Das Bild " . basename($files["filepath"]["name"]) . " wurde hinzugefügt.";
                 $returnarray["parentid"] = 0;
+
                 if (isset($_SESSION["actualboxid"])) $returnarray["parentid"] = intval($_SESSION["actualboxid"]);
                 $conn = self::connect();
                 $imagetitle = $conn->real_escape_string($data['imagetitle']);
                 $id = intval($_SESSION["id"]);
                 $stmt = $conn->prepare("INSERT INTO Image (Imagetitle, ImageLink, User_ID) VALUE (?,?,?)");
-                $stmt->bind_param("sss", $imagetitle, $imageName, $id);
+                $stmt->bind_param("sss", $imagetitle, $imageNameFullsize, $id);
                 $stmt->execute();
                 $returnarray["newimageid"] = $stmt->insert_id;
                 $returnarray["dbmessage"] .= $conn->error;
                 $returnarray["imageuploadfailed"] = false;
                 $returnarray = self::insertintoboxandboxuser($returnarray, $conn);
+
             } else {
                 echo"movefilenotworked";
                 $returnarray["dbmessage"] .= " Upload-Error.";
@@ -195,9 +206,61 @@ class db
 
 
         return $returnarray;
-
-
     }
+
+    public static function createThumbnail($srcPath, $dstPath){
+
+        $imagefile = $srcPath;
+        $imagesize = getimagesize($srcPath);
+        $imagewidth = $imagesize[0];
+        $imageheight = $imagesize[1];
+        $imagetype = $imagesize[2];
+
+
+        switch ($imagetype)
+        {
+            case 1:
+                $image = imagecreatefromgif($imagefile);
+                break;
+            case 2:
+                $image = imagecreatefromjpeg($imagefile);
+                break;
+            case 3:
+                $image = imagecreatefrompng($imagefile);
+                break;
+            default:
+                die('Unsupported image format');
+        }
+
+        $maxthumbwidth = 300;
+        $maxthumbheight = 450;
+
+        $thumbwidth = $imagewidth;
+        $thumbheight = $imageheight;
+
+        if ($thumbwidth > $maxthumbwidth)
+        {
+            $factor = $maxthumbwidth / $thumbwidth;
+            $thumbwidth *= $factor;
+            $thumbheight *= $factor;
+        }
+
+        if ($thumbheight > $maxthumbheight)
+        {
+            $factor = $maxthumbheight / $thumbheight;
+            $thumbwidth *= $factor;
+            $thumbheight *= $factor;
+        }
+
+
+        $thumbnail = imagecreatetruecolor($thumbwidth, $thumbheight);
+        imagecopyresampled($thumbnail, $image, 0, 0, 0, 0, $thumbwidth, $thumbheight, $imagewidth, $imageheight);
+        imagejpeg($thumbnail, $dstPath, 90);
+        imagedestroy($thumbnail);
+        imagedestroy($image);
+    }
+
+
 
     public static function createnote($data)
     {
