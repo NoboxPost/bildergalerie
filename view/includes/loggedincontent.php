@@ -49,7 +49,7 @@ if (isset($_SESSION["actualboxid"])) {
                 $imglink = $typeresult[0]["ImageLink"];
                 $boxid = $result[$i]["ID_Box"];
                 echo"<h3>$imgheader</h3> <form action='' method='post'><input type=\"hidden\" name=\"form\" value=\"deleteimage\"><input type='hidden' name='boxid' value='$boxid'><input type='submit'value='Löschen'></form>";
-                echo "<a href='../images/fullsize/$imglink'><img src='../images/thumbnails/$imglink' alt='Image uploaded by User'></a>";
+                echo "<a href='../images/fullsize/$imglink' target='_blank'><img src='../images/thumbnails/$imglink' alt='Image uploaded by User'></a>";
 
             }
             echo "</div>";
